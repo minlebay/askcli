@@ -50,8 +50,8 @@ ask --help
 ```yaml
 gemini:
   api_key: "your-api-key-here"
-  model: "gemini-pro"  # или gemini-flash
-  base_url: ""         # опционально
+  model: "gemini-2.5-flash-lite"  # модель Gemini
+  base_url: ""                    # опционально
 
 prompt:
   template: "ask > "   # настраиваемый промпт
