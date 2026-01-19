@@ -1,0 +1,15 @@
+gemini:
+  api_key: "your-api-key-here"
+  model: "gemini-3-flash-preview"
+  base_url: ""         # optional, defaults to official API
+
+prompt:
+  system_message: "You are a Linux terminal assistant. Answer only with terminal commands without additional explanations. If the question is not about terminal commands, answer briefly."
+
+alias:
+  name: "ask"          # alias name (for display)
+  enabled: true
+
+ui:
+  show_tokens: true    # show tokens by default
+  copy_hint: "press [C] to copy or any key to quit"
