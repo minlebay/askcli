@@ -65,7 +65,7 @@ func Load() (*Config, error) {
 	// Environment variables
 	viper.SetEnvPrefix("ASK")
 	viper.AutomaticEnv()
-	viper.BindEnv("gemini.api_key", "ASK_GEMINI_API_KEY")
+	viper.BindEnv("gemini.api_key", "GEMINI_API_KEY_ASK")
 	viper.BindEnv("gemini.model", "ASK_GEMINI_MODEL")
 
 	// Default values
@@ -104,7 +104,7 @@ func setDefaults() {
 
 func validate(cfg *Config) error {
 	if cfg.Gemini.APIKey == "" {
-		return fmt.Errorf("Gemini API key not set. Set ASK_GEMINI_API_KEY environment variable or specify in config")
+		return fmt.Errorf("Gemini API key not set. Set GEMINI_API_KEY_ASK environment variable or specify in config")
 	}
 	return nil
 }

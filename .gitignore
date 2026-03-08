@@ -1,0 +1,36 @@
+# Binaries
+ask
+askCli
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Config files with secrets
+config.yaml
+*.key
+.env
+
+# Build artifacts
+dist/
+build/

@@ -155,7 +155,6 @@ func cleanMarkdownCodeBlocks(text string) string {
 	// Pattern matches: ``` followed by optional language identifier and newline, then content, then closing ```
 	re := regexp.MustCompile("(?s)```[a-zA-Z]*\\n(.*?)```")
 	text = re.ReplaceAllString(text, "$1")
-
 	// Also handle cases where there might be just ``` on separate lines
 	text = strings.ReplaceAll(text, "```bash\n", "")
 	text = strings.ReplaceAll(text, "```sh\n", "")
@@ -163,9 +162,7 @@ func cleanMarkdownCodeBlocks(text string) string {
 	text = strings.ReplaceAll(text, "```bash", "")
 	text = strings.ReplaceAll(text, "```sh", "")
 	text = strings.ReplaceAll(text, "```", "")
-
 	// Clean up extra newlines
 	text = strings.TrimSpace(text)
-
 	return text
 }

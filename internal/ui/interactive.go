@@ -107,9 +107,7 @@ func readInputFallback(answer string, showTokens bool, inputTokens, outputTokens
 	// Use regular input via fmt.Scanln
 	var input string
 	fmt.Scanln(&input)
-
 	input = strings.TrimSpace(strings.ToUpper(input))
-
 	// Process command
 	switch input {
 	case "C":
