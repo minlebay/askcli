@@ -53,15 +53,15 @@ type UsageMetadata struct {
 	TotalTokenCount      int `json:"totalTokenCount"`
 }
 
-// NewClient creates a new Gemini API client
-func NewClient(cfg *config.Config) *Client {
+// NewClient creates a new Gemini API client with an explicit API key.
+func NewClient(cfg *config.Config, apiKey string) *Client {
 	baseURL := cfg.Gemini.BaseURL
 	if baseURL == "" {
 		baseURL = "https://generativelanguage.googleapis.com/v1beta"
 	}
 
 	return &Client{
-		apiKey:  cfg.Gemini.APIKey,
+		apiKey:  apiKey,
 		model:   cfg.Gemini.Model,
 		baseURL: baseURL,
 		client: &http.Client{

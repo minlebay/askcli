@@ -16,7 +16,6 @@ type Config struct {
 }
 
 type GeminiConfig struct {
-	APIKey  string `mapstructure:"api_key"`
 	Model   string `mapstructure:"model"`
 	BaseURL string `mapstructure:"base_url"`
 }
@@ -38,7 +37,8 @@ type UIConfig struct {
 
 var cfg *Config
 
-// Load loads configuration from file and environment variables
+// Load loads configuration from the config file (optional) and environment.
+// The API key is not part of the configuration: it lives in KWallet.
 func Load() (*Config, error) {
 	if cfg != nil {
 		return cfg, nil
@@ -62,10 +62,8 @@ func Load() (*Config, error) {
 		viper.AddConfigPath(path)
 	}
 
-	// Environment variables
-	viper.SetEnvPrefix("ASK")
-	viper.AutomaticEnv()
-	viper.BindEnv("gemini.api_key", "GEMINI_API_KEY_ASK")
+	// The API key is not read from the environment or the config file: it
+	// lives in KWallet. ASK_GEMINI_MODEL remains available for model choice.
 	viper.BindEnv("gemini.model", "ASK_GEMINI_MODEL")
 
 	// Default values
@@ -84,29 +82,17 @@ func Load() (*Config, error) {
 		return nil, fmt.Errorf("error parsing config: %w", err)
 	}
 
-	// Validation
-	if err := validate(cfg); err != nil {
-		return nil, err
-	}
-
 	return cfg, nil
 }
 
 func setDefaults() {
-	viper.SetDefault("gemini.model", "gemini-2.5-flash-lite")
+	viper.SetDefault("gemini.model", "gemini-3.5-flash-lite")
 	viper.SetDefault("prompt.template", "ask > ")
 	viper.SetDefault("prompt.system_message", "You are a Linux terminal assistant. Answer only with terminal commands without additional explanations. If the question is not about terminal commands, answer briefly.")
 	viper.SetDefault("alias.name", "ask")
 	viper.SetDefault("alias.enabled", true)
 	viper.SetDefault("ui.show_tokens", true)
 	viper.SetDefault("ui.copy_hint", "[C] copy, [Q] quit")
-}
-
-func validate(cfg *Config) error {
-	if cfg.Gemini.APIKey == "" {
-		return fmt.Errorf("Gemini API key not set. Set GEMINI_API_KEY_ASK environment variable or specify in config")
-	}
-	return nil
 }
 
 // Get returns the loaded configuration
